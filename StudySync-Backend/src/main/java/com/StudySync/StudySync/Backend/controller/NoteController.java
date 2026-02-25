@@ -45,7 +45,12 @@ public class NoteController {
     // POST /api/notes/user/{userId}
     @PostMapping("/user/{userId}")
     public ResponseEntity<Note> createNote(@PathVariable Long userId, @RequestBody Note note) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(noteService.createNote(userId, note));
+        try {
+            Note created = noteService.createNote(userId, note);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // PUT /api/notes/{id}
