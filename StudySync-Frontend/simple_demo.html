@@ -1,0 +1,124 @@
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StudySync Simple Page</title>
+    <link rel="stylesheet" href="./simple_demo.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-brand">
+        <h1>StudySync</h1>
+        <span class="tag"></span>
+      </div>
+      <p class="lead">Lightweight task preview — client-only UI.</p>
+    </header>
+
+    <main class="container two-col">
+      <section class="card tasks-col">
+        <div class="card-head">
+          <h2>Tasks</h2>
+          <div class="controls">
+            <input id="filter" placeholder="Filter tasks..." />
+          </div>
+        </div>
+        <ul id="taskList" class="task-list" aria-live="polite"></ul>
+      </section>
+
+      <aside class="card form-col">
+        <h3>Add task</h3>
+        <form id="addForm">
+          <label class="sr-only" for="title">Task title</label>
+          <input id="title" placeholder="Enter task title" required />
+          <label class="sr-only" for="deadline">Deadline</label>
+          <input id="deadline" type="date" />
+          <label class="sr-only" for="status">Status</label>
+          <select id="status">
+            <option value="PENDING">PENDING</option>
+            <option value="IN_PROGRESS">IN_PROGRESS</option>
+            <option value="COMPLETED">COMPLETED</option>
+          </select>
+          <div class="form-actions">
+            <button type="submit">Add Task</button>
+          </div>
+        </form>
+        <div class="hint">Click a task status to cycle it; use Delete to remove.</div>
+      </aside>
+    </main>
+
+    <footer class="footer">Open this file directly in the browser for a quick preview.</footer>
+
+    <script>
+      // client-side task UI
+      const initial = [
+        { id: 1, title: 'Read Chapter 1', status: 'PENDING', deadline: null },
+        { id: 2, title: 'Complete exercise', status: 'IN_PROGRESS', deadline: null },
+        { id: 3, title: 'Submit report', status: 'COMPLETED', deadline: null }
+      ]
+
+      let tasks = initial.slice()
+      let nextId = 4
+
+      const taskList = document.getElementById('taskList')
+      const addForm = document.getElementById('addForm')
+      const filterInput = document.getElementById('filter')
+
+      function statusClass(s){
+        return s === 'COMPLETED' ? 'completed' : s === 'IN_PROGRESS' ? 'inprogress' : 'pending'
+      }
+
+      function render(list){
+        const q = filterInput.value.trim().toLowerCase()
+        taskList.innerHTML = ''
+        const filtered = list.filter(t => !q || t.title.toLowerCase().includes(q))
+        if (!filtered.length){
+          taskList.innerHTML = '<li class="empty">No tasks</li>'
+          return
+        }
+        filtered.forEach(t => {
+          const li = document.createElement('li')
+          li.className = 'task'
+          li.innerHTML = `
+            <div class="task-left">
+              <div class="task-title">${escapeHtml(t.title)}</div>
+              <div class="task-meta">${t.deadline || ''}</div>
+            </div>
+            <div class="task-right">
+              <button class="btn toggle ${statusClass(t.status)}">${t.status}</button>
+              <button class="btn del" data-id="${t.id}" aria-label="Delete">✕</button>
+            </div>
+          `
+          // toggle status on badge click
+          li.querySelector('.toggle').addEventListener('click', () => {
+            t.status = t.status === 'COMPLETED' ? 'PENDING' : (t.status === 'PENDING' ? 'IN_PROGRESS' : 'COMPLETED')
+            render(tasks)
+          })
+          li.querySelector('.del').addEventListener('click', (e) => {
+            e.stopPropagation()
+            tasks = tasks.filter(x => x.id !== t.id)
+            render(tasks)
+          })
+          taskList.appendChild(li)
+        })
+      }
+
+      addForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const title = document.getElementById('title').value.trim()
+        const deadline = document.getElementById('deadline').value || null
+        const status = document.getElementById('status').value
+        if (!title) return
+        tasks.unshift({ id: nextId++, title, deadline, status })
+        addForm.reset()
+        render(tasks)
+      })
+
+      filterInput.addEventListener('input', () => render(tasks))
+
+      function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]) }
+
+      render(tasks)
+    </script>
+  </body>
+</html>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+:root{--bg:#f7fafc;--card:#ffffff;--accent:#2563eb;--muted:#6b7280;--success:#10b981}
+*{box-sizing:border-box}
+body{font-family:Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);margin:0;color:#111}
+.site-header{padding:18px 20px 8px;background:linear-gradient(90deg,#fff 0%, #fbfdff 100%)}
+.site-brand{display:flex;align-items:center;gap:12px}
+.site-brand h1{margin:0;color:var(--accent);font-size:1.6rem}
+.tag{background:#eef2ff;color:var(--accent);padding:4px 8px;border-radius:999px;font-size:0.75rem}
+.lead{margin:6px 0 0;color:var(--muted)}
+.container{max-width:980px;margin:18px auto;padding:20px;display:grid;grid-template-columns:1fr 320px;gap:18px}
+.card{background:var(--card);border-radius:10px;padding:14px;margin:0;box-shadow:0 8px 28px rgba(2,6,23,0.04)}
+.tasks-col{min-height:220px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.controls input{padding:8px;border:1px solid #e6e9ee;border-radius:8px}
+.task-list{list-style:none;padding:0;margin:0}
+.task{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:8px;border:1px solid #f1f5f9;margin-bottom:8px;transition:box-shadow .12s,transform .08s}
+.task:hover{box-shadow:0 6px 18px rgba(2,6,23,0.06);transform:translateY(-2px)}
+.task-left{display:flex;flex-direction:column}
+.task-title{font-weight:700}
+.task-meta{color:var(--muted);font-size:0.9rem}
+.task-right{display:flex;gap:8px;align-items:center}
+.btn{border-radius:8px;padding:6px 10px;border:0;cursor:pointer;font-weight:600}
+.btn.toggle{color:#fff}
+.btn.toggle.pending{background:#f59e0b}
+.btn.toggle.inprogress{background:#3b82f6}
+.btn.toggle.completed{background:var(--success)}
+.btn.del{background:transparent;border:1px solid #eef2f7;padding:6px 8px;border-radius:8px}
+.form-col input,.form-col select{width:100%;padding:10px;border:1px solid #e6e9ee;border-radius:8px;margin-bottom:10px}
+.form-actions{display:flex;justify-content:flex-end}
+.form-actions button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+.hint{margin-top:10px;color:var(--muted);font-size:0.9rem}
+.empty{color:var(--muted);text-align:center;padding:18px}
+.footer{padding:12px;text-align:center;color:var(--muted);font-size:0.9rem;margin-top:16px}
+
+@media (max-width:880px){
+	.container{grid-template-columns:1fr;}
+	.form-col{order:2}
+}
