@@ -23,7 +23,7 @@ public class Note {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
