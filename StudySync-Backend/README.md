@@ -25,27 +25,27 @@
 ## 📁 Package Structure
 
 ```
-src/main/java/com/studysync/
+src/main/java/com/StudySync/StudySync/Backend/
 ├── controller/
-│   ├── TaskController.java      # /api/tasks endpoints
-│   ├── NoteController.java      # /api/notes endpoints
-│   └── UserController.java      # /api/users endpoints
+│   ├── UserController.java      # GET/POST/PUT/DELETE /api/users
+│   ├── TaskController.java      # GET/POST/PUT/DELETE /api/tasks
+│   └── NoteController.java      # GET/POST/PUT/DELETE /api/notes
 ├── model/
-│   ├── Task.java                # Task entity (id, title, deadline, status)
-│   ├── Note.java                # Note entity (id, title, content)
-│   └── User.java                # User entity (id, name, email)
+│   ├── User.java                # User entity (id, name, email) — OneToMany Tasks & Notes
+│   ├── Task.java                # Task entity (id, title, description, deadline, status, user)
+│   └── Note.java                # Note entity (id, title, content, user)
 ├── repository/
-│   ├── TaskRepository.java
-│   ├── NoteRepository.java
-│   └── UserRepository.java
+│   ├── UserRepository.java      # findByEmail, existsByEmail
+│   ├── TaskRepository.java      # findByUserId, findByUserIdAndStatus
+│   └── NoteRepository.java      # findByUserId
 ├── service/
-│   ├── TaskService.java
-│   ├── NoteService.java
-│   └── UserService.java
-└── StudySyncApplication.java    # Main entry point
+│   ├── UserService.java         # create, read, update, delete users
+│   ├── TaskService.java         # create, read (by user/status), update, delete tasks
+│   └── NoteService.java         # create, read (by user), update, delete notes
+└── StudySyncBackendApplication.java   # Main entry point
 
 src/main/resources/
-└── application.properties       # DB config, server port, etc.
+└── application.properties       # H2 DB config, JPA settings, server port
 ```
 
 ---
@@ -58,18 +58,19 @@ src/main/resources/
 |---|---|---|
 | `GET` | `/api/tasks` | Get all tasks |
 | `GET` | `/api/tasks/{id}` | Get task by ID |
-| `POST` | `/api/tasks` | Create a new task |
+| `GET` | `/api/tasks/user/{userId}` | Get all tasks for a user |
+| `GET` | `/api/tasks/user/{userId}/status/{status}` | Filter tasks by status (`PENDING`, `IN_PROGRESS`, `COMPLETED`) |
+| `POST` | `/api/tasks/user/{userId}` | Create a new task for a user |
 | `PUT` | `/api/tasks/{id}` | Update a task |
 | `DELETE` | `/api/tasks/{id}` | Delete a task |
 
 **Sample Task JSON:**
 ```json
 {
-  "id": 1,
   "title": "Complete Lab 2 report",
+  "description": "Include screenshots and commands used",
   "deadline": "2026-03-01",
-  "status": "PENDING",
-  "userId": 1
+  "status": "PENDING"
 }
 ```
 
@@ -81,17 +82,16 @@ src/main/resources/
 |---|---|---|
 | `GET` | `/api/notes` | Get all notes |
 | `GET` | `/api/notes/{id}` | Get note by ID |
-| `POST` | `/api/notes` | Create a new note |
+| `GET` | `/api/notes/user/{userId}` | Get all notes for a user |
+| `POST` | `/api/notes/user/{userId}` | Create a new note for a user |
 | `PUT` | `/api/notes/{id}` | Update a note |
 | `DELETE` | `/api/notes/{id}` | Delete a note |
 
 **Sample Note JSON:**
 ```json
 {
-  "id": 1,
   "title": "Spring Boot Notes",
-  "content": "JPA annotations: @Entity, @Id, @GeneratedValue...",
-  "userId": 1
+  "content": "JPA annotations: @Entity, @Id, @GeneratedValue..."
 }
 ```
 
@@ -102,8 +102,10 @@ src/main/resources/
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/users` | Get all users |
-| `POST` | `/api/users` | Register a new user |
 | `GET` | `/api/users/{id}` | Get user by ID |
+| `POST` | `/api/users` | Register a new user |
+| `PUT` | `/api/users/{id}` | Update a user |
+| `DELETE` | `/api/users/{id}` | Delete a user |
 
 ---
 
@@ -158,13 +160,37 @@ H2 Console (dev only): **`http://localhost:8080/h2-console`**
 You can test all endpoints using **Postman** or `curl`:
 
 ```bash
-# Get all tasks
-curl http://localhost:8080/api/tasks
-
-# Create a new task
-curl -X POST http://localhost:8080/api/tasks \
+# Create a user
+curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
-  -d '{"title":"Complete Lab 3","deadline":"2026-03-05","status":"PENDING","userId":1}'
+  -d '{"name":"Shlok Bajaj","email":"shlok@studysync.com"}'
+
+# Get all users
+curl http://localhost:8080/api/users
+
+# Create a task for user 1
+curl -X POST http://localhost:8080/api/tasks/user/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Complete Lab 3","description":"Git & GitHub lab","deadline":"2026-03-05","status":"PENDING"}'
+
+# Get all tasks for user 1
+curl http://localhost:8080/api/tasks/user/1
+
+# Get tasks by status
+curl http://localhost:8080/api/tasks/user/1/status/PENDING
+
+# Create a note for user 1
+curl -X POST http://localhost:8080/api/notes/user/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Spring Boot Notes","content":"@Entity, @Id, @GeneratedValue are JPA annotations"}'
+
+# Update a task
+curl -X PUT http://localhost:8080/api/tasks/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Complete Lab 3","status":"COMPLETED"}'
+
+# Delete a note
+curl -X DELETE http://localhost:8080/api/notes/1
 ```
 
 ---
@@ -203,4 +229,18 @@ git push origin feature/backend
 
 ---
 
-*StudySync Backend | Lab 2 & 3 | Spring Boot REST API*
+## 📜 Commit History (Lab 3 — Git Log)
+
+| Step | Commit Message | Files Added |
+|---|---|---|
+| Branch | `git checkout -b feature/backend` | — |
+| Step 1 | `step 1: configure dependencies (JPA, H2, Lombok) and application.properties` | `pom.xml`, `application.properties` |
+| Step 2 | `step 2: add JPA model entities - User, Task, Note with relationships` | `User.java`, `Task.java`, `Note.java` |
+| Step 3 | `step 3: add Spring Data JPA repositories - UserRepository, TaskRepository, NoteRepository` | `UserRepository.java`, `TaskRepository.java`, `NoteRepository.java` |
+| Step 4 | `step 4: add service layer - UserService, TaskService, NoteService with business logic` | `UserService.java`, `TaskService.java`, `NoteService.java` |
+| Step 5 | `step 5: add REST controllers - UserController, TaskController, NoteController (full CRUD)` | `UserController.java`, `TaskController.java`, `NoteController.java` |
+| Step 6 | `step 6: update backend README with final structure, endpoints and commit log` | `README.md` |
+
+---
+
+*StudySync Backend | Lab 2 & 3 | Spring Boot REST API | Shlok Bajaj — [@ShlokBajaj3433](https://github.com/ShlokBajaj3433)*
