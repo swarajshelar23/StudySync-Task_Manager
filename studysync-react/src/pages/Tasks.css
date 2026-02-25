@@ -1,0 +1,101 @@
+.tasks-page { max-width: 780px; margin: 0 auto; }
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.tasks-header h2 { margin: 0; }
+
+.user-select {
+  padding: 8px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.task-form input, .task-form select {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.task-form input:first-child { flex: 2; min-width: 160px; }
+.task-form input:nth-child(2) { flex: 2; min-width: 140px; }
+.task-form input[type="date"] { flex: 1; min-width: 130px; }
+.task-form select { flex: 1; min-width: 120px; }
+.task-form button {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.task-form button:hover { background: #1d4ed8; }
+
+.task-list { display: flex; flex-direction: column; gap: 10px; }
+
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #f1f5f9;
+  transition: box-shadow 0.12s, transform 0.08s;
+}
+.task-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.task-info { flex: 1; }
+.task-title { font-weight: 700; font-size: 1rem; }
+.task-desc  { color: #374151; font-size: 0.9rem; margin-top: 2px; }
+.task-meta  { color: #6b7280; font-size: 0.85rem; margin-top: 2px; }
+
+.task-actions { display: flex; gap: 8px; align-items: center; }
+
+.btn-status {
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.btn-status.pending    { background: #f59e0b; }
+.btn-status.inprogress { background: #3b82f6; }
+.btn-status.completed  { background: #10b981; }
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid #eef2f7;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-delete:hover { background: #fef2f2; border-color: #fca5a5; }
+
+.error-msg {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.loading { text-align: center; padding: 40px; color: #6b7280; }
+.empty   { text-align: center; color: #6b7280; padding: 20px; }
