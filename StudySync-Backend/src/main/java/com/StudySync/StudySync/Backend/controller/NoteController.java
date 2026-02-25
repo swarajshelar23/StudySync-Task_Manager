@@ -62,7 +62,12 @@ public class NoteController {
     // DELETE /api/notes/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
-        noteService.deleteNote(id);
-        return ResponseEntity.noContent().build();
+        try {
+            noteService.getNoteById(id);
+            noteService.deleteNote(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
