@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lab 2 & 3 – Task Distribution</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f6fb;
+      color: #1e293b;
+      padding: 40px 20px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 48px;
+    }
+
+    /* ── Header ───────────────────────────────────── */
+    .header {
+      text-align: center;
+      border-bottom: 3px solid #4f46e5;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #4f46e5;
+      letter-spacing: -0.5px;
+    }
+    .header p {
+      margin-top: 6px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    /* ── Project Banner ───────────────────────────── */
+    .project-banner {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+    }
+    .project-banner .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .project-banner h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .project-banner p {
+      font-size: 14px;
+      opacity: 0.88;
+      line-height: 1.6;
+    }
+    .project-banner .stack-pills {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-banner .stack-pill {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── Section ──────────────────────────────────── */
+    .section {
+      margin-bottom: 36px;
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title .badge {
+      background: #e0e7ff;
+      color: #4f46e5;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── Member Cards ─────────────────────────────── */
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 18px;
+    }
+    .member-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .member-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .color-1 { background: #4f46e5; }
+    .color-2 { background: #0891b2; }
+    .color-3 { background: #059669; }
+    .color-4 { background: #d97706; }
+
+    .member-info h3 { font-size: 15px; font-weight: 700; }
+    .member-info a { font-size: 12px; color: #4f46e5; text-decoration: none; }
+    .member-info a:hover { text-decoration: underline; }
+    .role-tag {
+      margin-left: auto;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .role-backend  { background: #ede9fe; color: #6d28d9; }
+    .role-frontend { background: #dcfce7; color: #15803d; }
+    .role-styling  { background: #fef3c7; color: #b45309; }
+    .role-devops   { background: #fee2e2; color: #b91c1c; }
+
+    .task-list {
+      padding: 14px 18px;
+      list-style: none;
+    }
+    .task-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 13.5px;
+      line-height: 1.5;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+    .task-list li:last-child { border-bottom: none; }
+    .task-list li::before {
+      content: "▸";
+      color: #4f46e5;
+      font-size: 12px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .skill-tag {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 4px;
+      padding: 0px 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    /* ── Contributor Detail ─────────────────────────── */
+    .contrib-detail {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 12px 18px 14px;
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .contrib-detail strong { color: #1e293b; }
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .s-pill {
+      background: #e0e7ff;
+      color: #3730a3;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ── Lab Objectives ───────────────────────────── */
+    .lab-box {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .lab-box .lab-title {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .lab-box ol {
+      padding: 14px 18px 14px 36px;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #475569;
+    }
+    .lab-box .objective-text {
+      padding: 10px 18px 0;
+      font-size: 13px;
+      color: #475569;
+      font-style: italic;
+    }
+
+    /* ── Timeline ─────────────────────────────────── */
+    .timeline {
+      border-left: 3px solid #c7d2fe;
+      padding-left: 20px;
+      margin-left: 8px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -27px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      background: #4f46e5;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #4f46e5;
+    }
+    .timeline-item h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .timeline-item p {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .timeline-item .assignee {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ── GitHub Section ───────────────────────────── */
+    .github-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .github-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .github-card .gh-icon {
+      width: 34px;
+      height: 34px;
+      background: #1e293b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .github-card .gh-name { font-size: 13px; font-weight: 700; }
+    .github-card a { font-size: 11px; color: #4f46e5; text-decoration: none; word-break: break-all; }
+    .github-card a:hover { text-decoration: underline; }
+
+    /* ── Outcome ──────────────────────────────────── */
+    .outcome-box {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #166534;
+    }
+    .outcome-box strong { font-weight: 700; }
+
+    /* ── Footer ───────────────────────────────────── */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <h1>Lab 2 &amp; 3 — Task Distribution Document</h1>
+    <p>Web Application Development &amp; Version Control | Group of 4</p>
+  </div>
+
+  <!-- ── Selected Project ── -->
+  <div class="project-banner">
+    <div class="tag">Selected Project</div>
+    <h2>📋 StudySync — Student Task &amp; Notes Manager</h2>
+    <p>
+      A full-stack web application where students can register, log in, create personal tasks with deadlines,
+      write notes, and track their academic to-dos. Simple, practical, and covers all required technologies
+      so every team member has a meaningful contribution.
+    </p>
+    <div class="stack-pills">
+      <span class="stack-pill">Spring Boot (Backend)</span>
+      <span class="stack-pill">React (Frontend)</span>
+      <span class="stack-pill">HTML5 / CSS3</span>
+      <span class="stack-pill">REST API</span>
+      <span class="stack-pill">H2 / MySQL</span>
+      <span class="stack-pill">Git &amp; GitHub</span>
+    </div>
+  </div>
+
+  <!-- ── Lab Objectives ── -->
+  <div class="section">
+    <div class="section-title">
+      Lab Objectives
+      <span class="badge">Reference</span>
+    </div>
+
+    <div class="lab-box">
+      <div class="lab-title">Lab 2 — Basic Web Application Using Modern Frameworks</div>
+      <p class="objective-text">To design and develop a basic web application using modern frameworks.</p>
+      <ol>
+        <li>Select project idea and define requirements.</li>
+        <li>Install required tools (Java / Node / React).</li>
+        <li>Develop backend using Spring Boot or Node.js.</li>
+        <li>Develop frontend using HTML / CSS / React.</li>
+        <li>Execute and test application.</li>
+        <li>Document project details.</li>
+      </ol>
+    </div>
+
+    <div class="lab-box">
+      <div class="lab-title">Lab 3 — Version Control System: Git &amp; GitHub</div>
+      <p class="objective-text">To understand and apply version control using Git and GitHub.</p>
+      <ol>
+        <li>Install and configure Git.</li>
+        <li>Initialize Git repository.</li>
+        <li>Perform add, commit operations.</li>
+        <li>Create GitHub repository.</li>
+        <li>Push code to GitHub.</li>
+        <li>Perform branching and merging.</li>
+        <li>Document GitHub link and commands used.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ── Member Task Distribution ── -->
+  <div class="section">
+    <div class="section-title">
+      Member-wise Task Distribution
+      <span class="badge">Lab 2 + Lab 3</span>
+    </div>
+
+    <div class="member-grid">
+
+      <!-- Shlok -->
+      <div class="member-card">
+        <div class="member-header">
+          <div class="avatar color-1">S</div>
+          <div class="member-info">
+            <h3>Shlok Bajaj</h3>
+            <a href="https://github.com/ShlokBajaj3433" target="_blank">@ShlokBajaj3433</a>
+          </div>
+          <span class="role-tag role-backend">Backend Lead</span>
+        </div>
+        <ul class="task-list">
+          <li>Set up Spring Boot project with Maven / Gradle <span class="skill-tag">Java</span></li>
+          <li>Design data models: Task, Note, User entities (JPA)</li>
+          <li>Build REST API endpoints (CRUD for tasks &amp; notes)</li>
+          <li>Configure H2 in-memory DB (switch to MySQL optionally)</li>
+          <li>Implement basic input validation and error handling</li>
+          <li>Create <code>application.properties</code> / config files</li>
+          <li>Document API endpoints (README or Postman collection)</li>
+          <li><strong>Git Lab 3:</strong> Initialize repo, make initial commit, manage <code>main</code> / <code>develop</code> branches</li>
+        </ul>
+        <div class="contrib-detail">
+          <strong>Contributor Detail:</strong> Shlok is the only team member with Java and Spring Boot experience,
+          making him the natural backend owner. He is solely responsible for all server-side logic, database design,
+          and API contracts that the frontend consumes.
+          <div class="skills-row">
+            <span class="s-pill">Java 17</span>
+            <span class="s-pill">Spring Boot</span>
+            <span class="s-pill">JPA / Hibernate</span>
+            <span class="s-pill">REST API</span>
+            <span class="s-pill">H2 / MySQL</span>
+            <span class="s-pill">Maven</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swaraj -->
+      <div class="member-card">
+        <div class="member-header">
+          <div class="avatar color-2">Sw</div>
+          <div class="member-info">
+            <h3>Swaraj Shelar</h3>
+            <a href="https://github.com/swarajshelar23" target="_blank">@swarajshelar23</a>
+          </div>
+          <span class="role-tag role-frontend">Frontend Dev</span>
+        </div>
+        <ul class="task-list">
+          <li>Set up React app using <code>create-react-app</code> or Vite</li>
+          <li>Build Task List &amp; Task Detail React components</li>
+          <li>Integrate frontend with backend REST APIs using <code>fetch</code> / Axios</li>
+          <li>Implement Add / Edit / Delete task functionality in UI</li>
+          <li>Handle API error states and loading indicators</li>
+          <li>Write basic unit tests for components (optional)</li>
+          <li><strong>Git Lab 3:</strong> Create <code>feature/frontend</code> branch, commit regularly, raise PR to develop</li>
+        </ul>
+        <div class="contrib-detail">
+          <strong>Contributor Detail:</strong> Swaraj handles all React component development and API integration.
+          He bridges the backend work done by Shlok with the visual layer, ensuring data flows correctly between
+          the Spring Boot API and the user interface.
+          <div class="skills-row">
+            <span class="s-pill">React.js</span>
+            <span class="s-pill">JavaScript ES6+</span>
+            <span class="s-pill">Axios</span>
+            <span class="s-pill">Component State</span>
+            <span class="s-pill">Vite / CRA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zuza -->
+      <div class="member-card">
+        <div class="member-header">
+          <div class="avatar color-3">Z</div>
+          <div class="member-info">
+            <h3>Zuza Haini</h3>
+            <a href="https://github.com/zuzahaini" target="_blank">@zuzahaini</a>
+          </div>
+          <span class="role-tag role-styling">UI / CSS</span>
+        </div>
+        <ul class="task-list">
+          <li>Design overall UI layout (navbar, sidebar, cards)</li>
+          <li>Write all CSS / styling (plain CSS or Tailwind)</li>
+          <li>Build Login &amp; Register page (HTML + React)</li>
+          <li>Build Notes section UI component</li>
+          <li>Make app responsive for mobile screens</li>
+          <li>Ensure consistent color theme and typography</li>
+          <li><strong>Git Lab 3:</strong> Create <code>feature/ui-styling</code> branch, commit UI changes, merge after review</li>
+        </ul>
+        <div class="contrib-detail">
+          <strong>Contributor Detail:</strong> Zuza owns the entire visual identity of the application. She works
+          closely with Swaraj's React components to apply styling, and ensures the app looks polished and is usable
+          across all screen sizes.
+          <div class="skills-row">
+            <span class="s-pill">HTML5</span>
+            <span class="s-pill">CSS3</span>
+            <span class="s-pill">Tailwind CSS</span>
+            <span class="s-pill">Responsive Design</span>
+            <span class="s-pill">UI / UX</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jay -->
+      <div class="member-card">
+        <div class="member-header">
+          <div class="avatar color-4">J</div>
+          <div class="member-info">
+            <h3>Jay Dhakad</h3>
+            <a href="https://github.com/jaydhakad8810" target="_blank">@jaydhakad8810</a>
+          </div>
+          <span class="role-tag role-devops">Git / QA / Docs</span>
+        </div>
+        <ul class="task-list">
+          <li>Create GitHub repository and configure collaborators</li>
+          <li>Set up <code>.gitignore</code>, branch protection rules</li>
+          <li>Perform end-to-end application testing (manual QA)</li>
+          <li>Write and maintain the project <code>README.md</code></li>
+          <li>Prepare final documentation (screenshots, commands used)</li>
+          <li>Coordinate integration of frontend + backend</li>
+          <li><strong>Git Lab 3:</strong> Own branching strategy, document all Git commands used, perform final merge to <code>main</code></li>
+        </ul>
+        <div class="contrib-detail">
+          <strong>Contributor Detail:</strong> Jay acts as the project manager and Git lead. He ensures all team
+          members' branches are properly merged, the repository stays clean, bugs are caught through testing,
+          and the documentation is submission-ready.
+          <div class="skills-row">
+            <span class="s-pill">Git</span>
+            <span class="s-pill">GitHub</span>
+            <span class="s-pill">Manual QA</span>
+            <span class="s-pill">Technical Writing</span>
+            <span class="s-pill">Project Co-ord</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Workflow Timeline ── -->
+  <div class="section">
+    <div class="section-title">
+      Suggested Workflow
+      <span class="badge">Step by Step</span>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h4>Step 1 — Project Setup</h4>
+        <p>Create GitHub repo, add all 4 members as collaborators, set up branch structure (<code>main</code>, <code>develop</code>).</p>
+        <span class="assignee">Jay (GitHub) + Shlok (Init commit)</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 2 — Backend Development</h4>
+        <p>Build Spring Boot REST APIs for Tasks and Notes. Expose endpoints on <code>localhost:8080</code>. Test with Postman.</p>
+        <span class="assignee">Shlok</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 3 — Frontend Skeleton</h4>
+        <p>Set up React project. Create page structure (Home, Login, Tasks, Notes). Work on <code>feature/frontend</code> branch.</p>
+        <span class="assignee">Swaraj</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 4 — UI Styling</h4>
+        <p>Apply CSS styling to all components. Ensure responsive design. Work on <code>feature/ui-styling</code> branch.</p>
+        <span class="assignee">Zuza</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 5 — Integration &amp; Testing</h4>
+        <p>Connect React frontend to Spring Boot API. Test all features end-to-end. Fix bugs across branches.</p>
+        <span class="assignee">Jay + Swaraj + Shlok</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 6 — Merge &amp; Push to Main</h4>
+        <p>Merge <code>feature/*</code> → <code>develop</code> → <code>main</code>. Resolve merge conflicts (GitHub Pull Requests).</p>
+        <span class="assignee">Jay (Git Lead)</span>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Step 7 — Documentation</h4>
+        <p>Write README with setup instructions, screenshots, commands used, GitHub link. Prepare lab submission report.</p>
+        <span class="assignee">Jay + All Members</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── GitHub Profiles ── -->
+  <div class="section">
+    <div class="section-title">
+      Team GitHub Profiles
+      <span class="badge">Lab 3 Links</span>
+    </div>
+    <div class="github-grid">
+      <div class="github-card">
+        <div class="gh-icon">⬡</div>
+        <div>
+          <div class="gh-name">Shlok Bajaj</div>
+          <a href="https://github.com/ShlokBajaj3433" target="_blank">github.com/ShlokBajaj3433</a>
+        </div>
+      </div>
+      <div class="github-card">
+        <div class="gh-icon">⬡</div>
+        <div>
+          <div class="gh-name">Swaraj Shelar</div>
+          <a href="https://github.com/swarajshelar23" target="_blank">github.com/swarajshelar23</a>
+        </div>
+      </div>
+      <div class="github-card">
+        <div class="gh-icon">⬡</div>
+        <div>
+          <div class="gh-name">Zuza Haini</div>
+          <a href="https://github.com/zuzahaini" target="_blank">github.com/zuzahaini</a>
+        </div>
+      </div>
+      <div class="github-card">
+        <div class="gh-icon">⬡</div>
+        <div>
+          <div class="gh-name">Jay Dhakad</div>
+          <a href="https://github.com/jaydhakad8810" target="_blank">github.com/jaydhakad8810</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Git Branch Strategy ── -->
+  <div class="section">
+    <div class="section-title">
+      Branch Strategy (Lab 3)
+      <span class="badge">Git</span>
+    </div>
+    <div class="lab-box">
+      <div class="lab-title">Repository Branch Structure</div>
+      <ol style="padding: 14px 18px 14px 36px; font-size: 13.5px; line-height: 2; color: #475569; list-style: none;">
+        <li>🔵 <strong>main</strong> — Production-ready, final merged code (Jay manages)</li>
+        <li>🟡 <strong>develop</strong> — Integration branch (all features merge here first)</li>
+        <li>🟢 <strong>feature/backend</strong> — Shlok's Spring Boot API work</li>
+        <li>🟢 <strong>feature/frontend</strong> — Swaraj's React components</li>
+        <li>🟢 <strong>feature/ui-styling</strong> — Zuza's CSS and layout work</li>
+        <li>🟢 <strong>feature/docs-testing</strong> — Jay's documentation and QA</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ── Expected Outcome ── -->
+  <div class="section">
+    <div class="section-title">Expected Outcome</div>
+    <div class="outcome-box">
+      <strong>Lab 2:</strong> A working full-stack StudySync web application with Spring Boot backend REST APIs,
+      React frontend, and an integrated H2/MySQL database — demonstrating modern web development practices.<br><br>
+      <strong>Lab 3:</strong> A well-maintained GitHub repository with clear commit history, multiple branches,
+      pull requests, and documented Git commands — demonstrating end-to-end version control workflow.<br><br>
+      <strong>Overall:</strong> Students gain hands-on experience in web development and version control,
+      with each member contributing meaningfully based on their skill set.
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    Lab 2 &amp; 3 | Group Task Distribution | StudySync Project &nbsp;·&nbsp;
+    Generated for team: Shlok · Swaraj · Zuza · Jay
+  </div>
+
+</div>
+</body>
+</html>
