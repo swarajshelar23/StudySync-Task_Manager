@@ -28,7 +28,12 @@ public class NoteController {
     // GET /api/notes/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable Long id) {
-        return ResponseEntity.ok(noteService.getNoteById(id));
+        try {
+            Note note = noteService.getNoteById(id);
+            return ResponseEntity.ok(note);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // GET /api/notes/user/{userId}
