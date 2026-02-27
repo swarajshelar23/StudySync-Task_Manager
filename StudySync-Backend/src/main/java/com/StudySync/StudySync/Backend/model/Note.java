@@ -24,6 +24,7 @@ public class Note {
     private String content;
 
     @com.fasterxml.jackson.annotation.JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
