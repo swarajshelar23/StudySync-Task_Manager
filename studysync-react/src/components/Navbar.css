@@ -2,43 +2,76 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  height: 60px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  padding: 0 32px;
+  height: 72px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar-brand h1 {
   margin: 0;
-  font-size: 1.5rem;
-  letter-spacing: -0.5px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-brand h1::before {
+  content: '📚';
+  font-size: 1.4rem;
+  -webkit-text-fill-color: initial;
 }
 
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   padding: 0;
 }
 
 .navbar-links a {
-  color: rgba(255,255,255,0.8);
+  color: #94a3b8;
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background 0.15s, color 0.15s;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-links a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: 10px;
 }
 
 .navbar-links a:hover {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
+  color: #f1f5f9;
+}
+
+.navbar-links a:hover::before {
+  opacity: 1;
 }
 
 .navbar-links a.active {
-  background: rgba(255,255,255,0.22);
-  color: #fff;
+  color: #f1f5f9;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(6, 182, 212, 0.2) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }

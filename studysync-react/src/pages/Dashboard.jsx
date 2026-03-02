@@ -25,16 +25,25 @@ export default function Dashboard() {
 
       <div className="stat-grid">
         <Link to="/users" className="stat-card stat-users">
-          <div className="stat-number">{stats.users}</div>
-          <div className="stat-label">Users</div>
+          <div className="stat-icon">👥</div>
+          <div className="stat-content">
+            <div className="stat-number">{stats.users}</div>
+            <div className="stat-label">Users</div>
+          </div>
         </Link>
         <Link to="/tasks" className="stat-card stat-tasks">
-          <div className="stat-number">{stats.tasks}</div>
-          <div className="stat-label">Tasks</div>
+          <div className="stat-icon">📋</div>
+          <div className="stat-content">
+            <div className="stat-number">{stats.tasks}</div>
+            <div className="stat-label">Tasks</div>
+          </div>
         </Link>
         <Link to="/notes" className="stat-card stat-notes">
-          <div className="stat-number">{stats.notes}</div>
-          <div className="stat-label">Notes</div>
+          <div className="stat-icon">📝</div>
+          <div className="stat-content">
+            <div className="stat-number">{stats.notes}</div>
+            <div className="stat-label">Notes</div>
+          </div>
         </Link>
       </div>
 
