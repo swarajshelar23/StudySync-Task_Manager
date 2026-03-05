@@ -1,0 +1,5 @@
+com\StudySync\StudySync\Backend\StudySyncBackendApplication.class
+com\StudySync\StudySync\Backend\config\OpenApiConfig.class
+com\StudySync\StudySync\Backend\config\WebConfig$1.class
+com\StudySync\StudySync\Backend\controller\NoteController.class
+com\StudySync\StudySync\Backend\config\WebConfig.class
