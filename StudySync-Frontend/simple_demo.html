@@ -1,13 +1,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>StudySync Simple Page</title>
+    <title>StudySync Task Manager</title>
     <link rel="stylesheet" href="./simple_demo.css">
   </head>
   <body>
     <header class="site-header">
       <div class="site-brand">
-        <h1>StudySync</h1>
+        <h1>StudySync Task Manager</h1>
         <span class="tag"></span>
       </div>
       <p class="lead">Lightweight task preview — client-only UI.</p>
@@ -17,6 +17,7 @@
       <section class="card tasks-col">
         <div class="card-head">
           <h2>Tasks</h2>
+          <p id="taskCount" class="task-count"></p>
           <div class="controls">
             <input id="filter" placeholder="Filter tasks..." />
           </div>
@@ -66,11 +67,15 @@
         return s === 'COMPLETED' ? 'completed' : s === 'IN_PROGRESS' ? 'inprogress' : 'pending'
       }
 
-      function render(list){
-        const q = filterInput.value.trim().toLowerCase()
-        taskList.innerHTML = ''
-        const filtered = list.filter(t => !q || t.title.toLowerCase().includes(q))
-        if (!filtered.length){
+    function render(list){
+  const q = filterInput.value.trim().toLowerCase()
+  taskList.innerHTML = ''
+  const filtered = list.filter(t => !q || t.title.toLowerCase().includes(q))
+
+  document.getElementById('taskCount').innerText =
+    `Total Tasks: ${filtered.length}`
+
+  if (!filtered.length){
           taskList.innerHTML = '<li class="empty">No tasks</li>'
           return
         }
@@ -93,10 +98,11 @@
             render(tasks)
           })
           li.querySelector('.del').addEventListener('click', (e) => {
-            e.stopPropagation()
-            tasks = tasks.filter(x => x.id !== t.id)
-            render(tasks)
-          })
+  e.stopPropagation()
+  if (!confirm("Are you sure you want to delete this task?")) return
+  tasks = tasks.filter(x => x.id !== t.id)
+  render(tasks)
+})
           taskList.appendChild(li)
         })
       }
@@ -108,6 +114,7 @@
         const status = document.getElementById('status').value
         if (!title) return
         tasks.unshift({ id: nextId++, title, deadline, status })
+        alert("Task added successfully!")
         addForm.reset()
         render(tasks)
       })
