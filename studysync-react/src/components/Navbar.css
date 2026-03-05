@@ -2,76 +2,83 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 2rem;
   height: 72px;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  background: var(--bg-primary);
+  border-bottom: 2px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
 .navbar-brand h1 {
   margin: 0;
-  font-size: 1.6rem;
+  padding: 0;
+  font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 50%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.02em;
+  color: var(--primary);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.75rem;
 }
 
 .navbar-brand h1::before {
   content: '📚';
   font-size: 1.4rem;
-  -webkit-text-fill-color: initial;
 }
 
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 6px;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
 }
 
 .navbar-links a {
-  color: #94a3b8;
+  color: var(--text-secondary);
   text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 0.625rem 1.125rem;
+  border-radius: 6px;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.navbar-links a::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  border-radius: 10px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
 
 .navbar-links a:hover {
-  color: #f1f5f9;
-}
-
-.navbar-links a:hover::before {
-  opacity: 1;
+  color: var(--primary);
+  background: var(--bg-tertiary);
+  border-color: var(--border);
 }
 
 .navbar-links a.active {
-  color: #f1f5f9;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(6, 182, 212, 0.2) 100%);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.navbar-links a.active:hover {
+  background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .navbar-brand h1 {
+    font-size: 1.25rem;
+  }
+
+  .navbar-links {
+    gap: 0.25rem;
+  }
+
+  .navbar-links a {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+  }
 }
