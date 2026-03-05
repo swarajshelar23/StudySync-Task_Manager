@@ -1,0 +1,27 @@
+# Backend build outputs
+StudySync-Backend/target/
+StudySync-Backend/.mvn/
+StudySync-Backend/.idea/
+StudySync-Backend/*.iml
+
+# Log files
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Frontend build outputs and dependencies
+StudySync-Frontend/node_modules/
+studysync-react/node_modules/
+studysync-react/dist/
+studysync-react/.vite/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
