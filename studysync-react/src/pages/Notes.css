@@ -1,0 +1,102 @@
+.notes-page { max-width: 780px; margin: 0 auto; }
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.notes-header h2 { margin: 0; }
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.note-form input, .note-form textarea {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.note-form button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.note-form button:hover { background: #1d4ed8; }
+
+.note-list { display: flex; flex-direction: column; gap: 12px; }
+
+.note-card {
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.note-body { flex: 1; }
+.note-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+.note-content { color: #374151; font-size: 0.95rem; white-space: pre-wrap; }
+
+.note-actions { display: flex; gap: 8px; }
+
+.btn-edit {
+  background: #eef2ff;
+  color: #2563eb;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-edit:hover { background: #dbeafe; }
+
+.note-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.note-edit input, .note-edit textarea {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.note-edit-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.btn-save {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}

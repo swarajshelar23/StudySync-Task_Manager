@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #f7fafc;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  color: #111827;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 20px;
+}
+
+.error-msg {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid #eef2f7;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-delete:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.user-select {
+  padding: 8px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
