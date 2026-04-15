@@ -56,7 +56,6 @@
             <scope>compile</scope>
         </dependency>
 
-<<<<<<< HEAD
         <!-- Hibernate Validator (Jakarta Validation provider) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,13 +69,12 @@
             <scope>test</scope>
         </dependency>
 
-
-		<!-- Swagger UI via SpringDoc OpenAPI -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.8.5</version>
-		</dependency>
+        <!-- Swagger UI via SpringDoc OpenAPI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.5</version>
+        </dependency>
 	</dependencies>
 
 	<build>
