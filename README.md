@@ -199,6 +199,7 @@ git pull origin develop
 | Swaraj Shelar | Frontend Dev | [@swarajshelar23](https://github.com/swarajshelar23) |
 | Zuza Haini | UI / Styling | [@zuzahaini](https://github.com/zuzahaini) |
 | Jay Dhakad | Git / QA / Docs | [@jaydhakad8810](https://github.com/jaydhakad8810) |
+| Vimanyu Sharma|API Integration & Testing| [@vimanyusharma570](https://github.com/vimanyusharma570-collab) |
 
 ---
 
