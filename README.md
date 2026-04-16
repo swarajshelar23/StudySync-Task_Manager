@@ -87,21 +87,20 @@
 **Skills used:** Git, GitHub, software testing, technical writing, project coordination
 
 ---
-### 🟠 Vimanyu Sharma — Git Lead / QA / Documentation
+### 🟠 Vimanyu Sharma — Integration Lead / QA / Documentation
 **GitHub:** [@vimanyusharma570](https://github.com/vimanyusharma570-collab)
 **Branch:** `feature/docs-testing`
 
 **Responsibilities:**
-- Created the GitHub repository and added all collaborators
-- Set up `.gitignore` and branch protection rules
-- Owned the branching strategy (`main` → `develop` → `feature/*`)
-- Performed end-to-end manual QA testing of the full application
-- Coordinated frontend + backend integration
-- Wrote and maintained this `README.md` and project documentation
-- Documented all Git commands used (see Lab 3 section below)
-- Performed all final Pull Request reviews and merges to `main`
-
-**Skills used:** Git, GitHub, software testing, technical writing, project coordination
+- Led frontend–backend integration and ensured smooth API connectivity
+- Verified all REST APIs using Postman and validated responses
+- Performed detailed testing of edge cases and bug tracking
+- Assisted in resolving integration issues between React and Spring Boot
+- Contributed to improving project structure and folder organization
+- Co-authored and refined the README.md and technical documentation
+- Supported final deployment readiness and stability checks
+- Collaborated in pull request reviews and suggested improvements
+**Skills used:** API Testing, Integration Debugging, Git, Postman, Problem Solving, Documentation
 ## 🗂️ Project Structure
 
 ```
