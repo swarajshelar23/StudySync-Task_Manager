@@ -64,7 +64,7 @@
 - Built the Login and Register page UI (HTML + React)
 - Built the Notes section UI component
 - Ensured responsive design for mobile and tablet screens
-- Maintained consistent color theme and typography throughout
+- Maintained consistent color theme 
 
 **Skills used:** HTML5, CSS3, Tailwind CSS, responsive design, UI/UX principles
 
@@ -198,6 +198,15 @@ git pull origin develop
 | Shlok Bajaj | Backend Lead | [@ShlokBajaj3433](https://github.com/ShlokBajaj3433) |
 | Swaraj Shelar | Frontend Dev | [@swarajshelar23](https://github.com/swarajshelar23) |
 | Zuza Haini | UI / Styling | [@zuzahaini](https://github.com/zuzahaini) |
+
+---
+
+## 📝 Local development notes
+- Commit 1: Added project note for local testing and workflow validation.
+- Commit 2: Expanded documentation with a second guidance bullet for review.
+- Commit 3: Added a third note to demonstrate a sequence of local commits.
+- Commit 4: Finalized local notes section and ensured all changes were pushed to main.
+
 | Jay Dhakad | Git / QA / Docs | [@jaydhakad8810](https://github.com/jaydhakad8810) |
 | Vimanyu Sharma|API Integration & Testing| [@vimanyusharma570](https://github.com/vimanyusharma570-collab) |
 
