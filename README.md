@@ -205,6 +205,7 @@ git pull origin develop
 - Commit 1: Added project note for local testing and workflow validation.
 - Commit 2: Expanded documentation with a second guidance bullet for review.
 - Commit 3: Added a third note to demonstrate a sequence of local commits.
+- Commit 4: Finalized local notes section and ensured all changes were pushed to main.
 
 | Jay Dhakad | Git / QA / Docs | [@jaydhakad8810](https://github.com/jaydhakad8810) |
 | Vimanyu Sharma|API Integration & Testing| [@vimanyusharma570](https://github.com/vimanyusharma570-collab) |
